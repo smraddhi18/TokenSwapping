@@ -1,7 +1,8 @@
 {
+  "type": "json",
   "_format": "hh-sol-artifact-1",
   "contractName": "CustomDex",
-  "sourceName": "contracts/CustomEx.sol",
+  "sourceName": "contracts/CustomDex.sol",
   "abi": [
     {
       "inputs": [],

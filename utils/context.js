@@ -1,5 +1,5 @@
 import {BigNumber, ethers} from "ethers";
-import {contract, tokenContract} from "./contract";
+import {contract, tokenContract} from "./contract.mjs";
 import {toEth, toWei} from "./utils";
 
 export async function swapEthToToken(tokenName, amount){
@@ -10,7 +10,7 @@ export async function swapEthToToken(tokenName, amount){
         const data =await contractObj.swapEthToToken(tokenName,tx);
         const receipt =await data.wait();
         return receipt;
-    } catch (error) {
+    } catch (e) {
         return parseErrorMsg(e);
     }
 }
@@ -27,7 +27,7 @@ export async function hasValifdAllowance(owner, tokenName, amount){
             BigNumber.from(toWei(amount))
         )
     } catch (error) {
-        
+        return parseErrorMsg(e);   
     }
 }
 
@@ -38,7 +38,7 @@ export async function swapaEthtoToken(){
   
     const receipt = await data.wait();
     return receipt; 
-  } catch (error) {
+  } catch (e) {
     return parseErrorMsg(e);
   }
 }
@@ -49,7 +49,7 @@ export async function swapTokenToToken(srcToken, destToken, amount){
         const data =contractObj.swapTokenToToken(srcToken,destToken,toWei(amount));
         const receipt = await data.wait();
         return receipt;
-    } catch (error) {
+    } catch (e) {
         return parseErrorMsg(e);
         
     }
@@ -61,12 +61,12 @@ export async function getTokenAddressBalance(tokenName,address){
     return balance;
 }
 
-export async function getTokenAdderss(tokenName){
+export async function getTokenAddress(tokenName){
     try {
         const contractObj = await contract();
         const address = await contractObj.getTokenAddress(tokenName);
         return address;
-    } catch (error) {
+    } catch (e) {
         return parseErrorMsg(e);                
     }
 }
@@ -85,7 +85,7 @@ export async function increaseAllowance(tokenName,amount){
         const receipt = await data.wait();
         return data;
 
-    } catch (error) {
+    } catch (e) {
         return parseErrorMsg(e);
     }
 }
@@ -104,7 +104,7 @@ export async function getAllHistory(){
          userAddress: history.userAddress,
      }));
      return historyTransaction;
-   } catch (error) {
+   } catch (e) {
         return parseErrorMsg(e);
    }
 }
